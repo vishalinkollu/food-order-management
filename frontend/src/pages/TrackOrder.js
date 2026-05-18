@@ -1,4 +1,4 @@
-import React, { useEffect,useState} from "react";
+import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import API from "../api/api";
@@ -6,7 +6,7 @@ import socket from "../socket/socket";
 import Loader from "../components/Loader";
 import OrderStatusCard from "../components/OrderStatusCard";
 import "../styles/trackOrder.css";
-import toast, {Toaster} from "react-hot-toast";
+import toast, { Toaster } from "react-hot-toast";
 
 function TrackOrder() {
   const { id } = useParams();
@@ -43,7 +43,7 @@ function TrackOrder() {
     return () => {
       socket.off("orderUpdated");
     };
-  }, []);
+  }, [id, navigate]);
 
   const fetchOrder = async () => {
     try {
