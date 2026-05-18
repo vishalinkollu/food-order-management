@@ -1,0 +1,30 @@
+.navbar {
+  height: 80px;
+  background: linear-gradient(
+    to right,
+    #ff6b35,
+    #ffb703
+  );
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  padding: 0 40px;
+
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.logo {
+  color: white;
+  font-size: 32px;
+  font-weight: bold;
+}
+
+.cart-btn {
+  background: white;
+  color: #ff6b35;
+  padding: 12px 24px;
+  border-radius: 30px;
+  font-weight: bold;
+}
