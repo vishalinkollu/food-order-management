@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, {useEffect,useState } from "react";
 import { useParams } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import API from "../api/api";
@@ -6,14 +6,29 @@ import socket from "../socket/socket";
 import Loader from "../components/Loader";
 import OrderStatusCard from "../components/OrderStatusCard";
 import "../styles/trackOrder.css";
-import toast, { Toaster } from "react-hot-toast";
+import toast, {Toaster} from "react-hot-toast";
 
 function TrackOrder() {
   const { id } = useParams();
   const navigate = useNavigate();
-  const [order, setOrder] = useState(null);
+
+  const [order, setOrder] =useState(null);
 
   useEffect(() => {
+    const fetchOrder =
+      async () => {
+        try {
+          const { data } =
+            await API.get(
+              `/api/orders/${id}`
+            );
+
+          setOrder(data);
+        } catch (error) {
+          console.log(error);
+        }
+      };
+
     fetchOrder();
 
     socket.on(
@@ -44,18 +59,6 @@ function TrackOrder() {
       socket.off("orderUpdated");
     };
   }, [id, navigate]);
-
-  const fetchOrder = async () => {
-    try {
-      const { data } = await API.get(
-        `/api/orders/${id}`
-      );
-
-      setOrder(data);
-    } catch (error) {
-      console.log(error);
-    }
-  };
 
   if (!order) return <Loader />;
 
